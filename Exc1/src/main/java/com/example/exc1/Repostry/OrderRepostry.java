@@ -10,4 +10,6 @@ public interface OrderRepostry extends JpaRepository<Order, Integer> {
     Order findOrderById(Integer Id);
     Order findOrderByStatus();
 
+
 }
+

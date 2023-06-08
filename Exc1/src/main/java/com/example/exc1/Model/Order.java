@@ -28,7 +28,7 @@ public class Order {
     @ManyToOne
 @JoinColumn(name = "orders", referencedColumnName = "id")
     @JsonIgnore
-    private myUser myUser;
+    private MyUser myUser;
 
 
 @OneToMany(mappedBy = "order")

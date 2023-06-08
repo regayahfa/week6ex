@@ -1,7 +1,7 @@
 package com.example.exc1.Controller;
 
 import com.example.exc1.Model.Order;
-import com.example.exc1.Model.myUser;
+import com.example.exc1.Model.MyUser;
 import com.example.exc1.Servis.OrderServis;
 import com.example.exc1.Servis.UserServis;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class OrderControllar {
     }
 
     @PutMapping("/updateorder/{orderId}")
-    public ResponseEntity updateOrder(@AuthenticationPrincipal myUser myUser, @RequestBody Order order, @PathVariable Integer orderId ){
+    public ResponseEntity updateOrder(@AuthenticationPrincipal MyUser myUser, @RequestBody Order order, @PathVariable Integer orderId ){
 userServis.updateuser(myUser.getId(),order,orderId);
         return ResponseEntity.status(200).body("order UPDATE");
     }
@@ -47,6 +47,11 @@ userServis.updateuser(myUser.getId(),order,orderId);
 public ResponseEntity getOrderById(Integer id){
         orderServis.getOrderById(id);
         return ResponseEntity.status(200).body(id);
+}
+@GetMapping("/GET/status")
+public ResponseEntity getOrderByStatus(){
+orderServis.getOrderByStatus();
+return ResponseEntity.status(200).body("status order");
 }
 
 }

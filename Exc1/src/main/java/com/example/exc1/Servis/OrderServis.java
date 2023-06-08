@@ -3,7 +3,7 @@ package com.example.exc1.Servis;
 import com.example.exc1.ApiExcepion.ApiExption;
 import com.example.exc1.Model.Order;
 import com.example.exc1.Model.Prodect;
-import com.example.exc1.Model.myUser;
+import com.example.exc1.Model.MyUser;
 import com.example.exc1.Repostry.OrderRepostry;
 import com.example.exc1.Repostry.ProductRepostry;
 import com.example.exc1.Repostry.UserRepostry;
@@ -24,7 +24,7 @@ public class OrderServis {
         return orderRepostry.findAll();
     }
     public void addOrder(Order order,  Integer prodectId , Integer userId) {
-        myUser myUser =userRepostry.findmyUserById(userId);
+        MyUser myUser =userRepostry.findmyUserById(userId);
         Prodect prodect1=productRepostry.findProdectById(prodectId);
         if (myUser ==null||prodect1==null)
             throw new ApiExption("not fuond");
@@ -36,7 +36,7 @@ public class OrderServis {
     }
     public void updateOrder( Integer userId, Order order, Integer orderId) {
         Order order1=orderRepostry.findOrderById(orderId);
-        myUser myUser =userRepostry.findmyUserById(userId);
+        MyUser myUser =userRepostry.findmyUserById(userId);
         if (order1==null|| myUser ==null){
             throw new ApiExption("order not fuond");
         }
@@ -49,7 +49,7 @@ public class OrderServis {
         orderRepostry.save(order1);
     }
     public void deleteOrder( Integer userId, Integer OrderId  ) {
-        myUser myUser =userRepostry.findmyUserById(userId);
+        MyUser myUser =userRepostry.findmyUserById(userId);
         Order oldorder=orderRepostry.findOrderById(OrderId);
         if (oldorder==null || oldorder.getStatus().equals("inProgress")|| oldorder.getStatus().equals("completed")){
             throw new ApiExption("can not deleded");
@@ -63,6 +63,14 @@ public class OrderServis {
 
     public Order getOrderById(Integer id){
         Order order=orderRepostry.findOrderById(id);
+        if (order==null){
+            throw new ApiExption("not found");
+        }
+        return order;
+    }
+
+    public Order getOrderByStatus(){
+        Order order=orderRepostry.findOrderByStatus();
         if (order==null){
             throw new ApiExption("not found");
         }

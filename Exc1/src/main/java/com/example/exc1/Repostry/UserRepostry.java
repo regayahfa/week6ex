@@ -1,14 +1,14 @@
 package com.example.exc1.Repostry;
 
-import com.example.exc1.Model.myUser;
+import com.example.exc1.Model.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface UserRepostry extends JpaRepository<myUser, Integer> {
+public interface UserRepostry extends JpaRepository<MyUser, Integer> {
 
-    myUser findmyUserById(Integer id);
+    MyUser findmyUserById(Integer id);
 
-    myUser findAllByOrder();
+    MyUser findAllByOrder();
 }

@@ -22,8 +22,8 @@ private final ProductServis productServis;
         return ResponseEntity.status(200).body(prodects);
     }
     @PostMapping("/add")
-    public ResponseEntity addprodect(@AuthenticationPrincipal Prodect prodect){
-        productServis.addprodect(prodect);
+    public ResponseEntity addprodect(@AuthenticationPrincipal Order order,@RequestBody Prodect prodect){
+        productServis.addprodect(order.getId(),prodect);
 
         return ResponseEntity.status(200).body("prodect added");
     }
@@ -39,7 +39,7 @@ private final ProductServis productServis;
     @DeleteMapping("/deleteTODO/{TodoId}")
     public ResponseEntity daleteprodect(@AuthenticationPrincipal Prodect prodect,@PathVariable Integer OrderId){
 
-        productServis.deleteprodect(OrderId);
+        productServis.deleteprodect(OrderId, prodect.getId());
         return ResponseEntity.status(200).body("prodect is deleted");
     }
     @GetMapping("/getByProdect")

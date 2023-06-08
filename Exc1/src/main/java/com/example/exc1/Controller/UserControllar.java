@@ -1,7 +1,7 @@
 package com.example.exc1.Controller;
 
 import com.example.exc1.Model.Order;
-import com.example.exc1.Model.myUser;
+import com.example.exc1.Model.MyUser;
 import com.example.exc1.Servis.OrderServis;
 import com.example.exc1.Servis.UserServis;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ public class UserControllar {
     private final UserServis userServis;
 private final OrderServis orderServis;
     @PostMapping("/reggister")
-    public ResponseEntity reggister(@RequestBody myUser myUser){
+    public ResponseEntity reggister(@RequestBody MyUser myUser){
         userServis.reggister(myUser);
         return ResponseEntity.status(200).body("user reggister");
     }
@@ -40,14 +40,14 @@ private final OrderServis orderServis;
     }
 
     @PostMapping("/add")
-    public ResponseEntity adduser(@AuthenticationPrincipal myUser myUser){
-        userServis.adduser(myUser);
+    public ResponseEntity adduser(@AuthenticationPrincipal Order order,@RequestBody MyUser myUser){
+        userServis.adduser(order.getId(),myUser);
 
         return ResponseEntity.status(200).body("user added");
     }
 
     @PutMapping("/updateUser/{OrderId}")
-    public ResponseEntity updateuser(@AuthenticationPrincipal myUser myUser, @RequestBody Order order, @PathVariable Integer OrderId ){
+    public ResponseEntity updateuser(@AuthenticationPrincipal MyUser myUser, @RequestBody Order order, @PathVariable Integer OrderId ){
 
         userServis.updateuser(myUser.getId(),order,OrderId);
 
@@ -55,7 +55,7 @@ private final OrderServis orderServis;
     }
 
     @DeleteMapping("/deleteuser/{userId}")
-    public ResponseEntity daleteuser(@AuthenticationPrincipal myUser myUser, @PathVariable Integer userId){
+    public ResponseEntity daleteuser(@AuthenticationPrincipal MyUser myUser, @PathVariable Integer userId){
 
         userServis.deleteuser(myUser.getId(),userId);
         return ResponseEntity.status(200).body("user is deleted");
